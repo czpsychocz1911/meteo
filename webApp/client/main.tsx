@@ -1,15 +1,17 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ConfigProvider } from "antd"
 import { Meteor } from 'meteor/meteor';
-import { App } from '/imports/ui/App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Index } from '/imports/ui/Index';
 
 Meteor.startup(() => {
+  const router = createBrowserRouter([{
+    path: "/",
+    element: <Index/>
+  }])
   const container = document.getElementById('react-target');
   const root = createRoot(container!);
   root.render(
-    <ConfigProvider>
-      <App />
-    </ConfigProvider>
+    <RouterProvider router={router}/>
   );
 });
