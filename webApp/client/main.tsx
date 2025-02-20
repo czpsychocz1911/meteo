@@ -1,25 +1,57 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Meteor } from 'meteor/meteor';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Index } from '/imports/ui/Index';
 import { ProtectedRoute } from '/imports/ui/ProtectedRoute';
+import { MainPage } from '/imports/ui/MainPage';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { DarkModeToggle } from '/imports/ui/DarkModeToggle';
+
+const getDefaultTheme = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+};
+
+const App = () => {
+  const [themeMode, setThemeMode] = useState(getDefaultTheme());
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: (themeMode ?? "light") as "light" | "dark", 
+        },
+      }),
+    [themeMode]
+  );
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Index />,
+    },
+    {
+      path: "/main",
+      element: (
+        <ProtectedRoute>
+          <MainPage />
+        </ProtectedRoute>
+      ),
+    },
+  ]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+      <DarkModeToggle themeMode={themeMode} setThemeMode={setThemeMode}/>
+    </ThemeProvider>
+  );
+};
 
 Meteor.startup(() => {
-  const router = createBrowserRouter([{
-    path: "/",
-    element: <Index/>,
-  },{
-    path: "/main",
-    element: (
-      <ProtectedRoute>
-        <p>ASDF</p>
-      </ProtectedRoute>
-    ),
-  }])
   const container = document.getElementById('react-target');
-  const root = createRoot(container!);
-  root.render(
-    <RouterProvider router={router}/>
-  );
+  if (!container) return;
+  const root = createRoot(container);
+  root.render(<App />);
 });

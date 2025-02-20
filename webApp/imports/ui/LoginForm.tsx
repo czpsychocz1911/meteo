@@ -1,6 +1,7 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { Meteor } from "meteor/meteor";
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const LoginForm: React.FC = () => {
