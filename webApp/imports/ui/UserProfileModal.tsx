@@ -9,6 +9,7 @@ import {
 import { Meteor } from "meteor/meteor";
 import { useFind } from "meteor/react-meteor-data";
 import React from "react";
+import { UserProfileModalBox } from "./UserProfileModalBox";
 
 export const UserProfileModal: React.FC = () => {
 	const [open, setOpen] = React.useState(false);
@@ -39,9 +40,7 @@ export const UserProfileModal: React.FC = () => {
 				{loading ? (
 					<CircularProgress />
 				) : user ? (
-					<div>
-						<p>nasel jsem</p>
-					</div>
+                    <UserProfileModalBox user={user} handleClose={handleClose}/>
 				) : (
 					<p>nenasel jsem</p>
 				)}
