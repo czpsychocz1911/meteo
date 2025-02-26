@@ -6,7 +6,7 @@ def main():
     if not(client):
         raise Exception("No client found")
     
-    db.list_collection_names(client)
+    print("jdu spat")
 
 if __name__ == "__main__":
     main()
