@@ -20,6 +20,7 @@ try:
     while True:
         print(get_relative_humidity(i2c))
         print(get_temp(i2c))
+        print()
         time.sleep(1)
 except KeyboardInterrupt:
     print("Stopped by user")
