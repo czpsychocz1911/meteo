@@ -36,7 +36,7 @@ export const UserProfileModalBox: React.FC<{
 		>
 			<Stack direction="row" justifyItems="center" alignItems="center">
 				<Typography component={"h1"} ><b>User profile settings</b></Typography>
-				<IconButton children={<CancelIcon/>} sx={{marginLeft: "auto" }}/>
+				<IconButton children={<CancelIcon/>} sx={{marginLeft: "auto" }} onClick={handleClose}/>
 			</Stack>
 			<Accordion>
 				<AccordionSummary expandIcon={<ArrowDownwardIcon />}>

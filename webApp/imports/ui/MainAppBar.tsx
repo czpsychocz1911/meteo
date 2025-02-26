@@ -21,13 +21,14 @@ export const MainAppBar: React.FC = () => {
 					paddingBottom={1}
 				>
 					<h1>Main Page</h1>
-					<Button onClick={handleMenu} color="secondary">
+					<Button onClick={handleMenu} color="secondary" variant="contained" sx={{marginRight: "0px"}}>
 						Open user settings
 					</Button>
 					<Menu
 						anchorEl={anchorEl}
 						open={Boolean(anchorEl)}
 						onClose={() => setAnchorEl(null)}
+						
 					>
                         <UserProfileModal/>
 						<MenuItem>Settings</MenuItem>
