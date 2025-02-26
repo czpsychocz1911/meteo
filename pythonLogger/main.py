@@ -20,7 +20,7 @@ def main():
     
     try:
         while True:
-            soilVol = read_soil_values(ads,ADS.P0, soilEnum.VOLTAGE)
+            soilVol = read_soil_values(ads,ADS.P1, soilEnum.VOLTAGE)
             soildPer = calculate_percentage_value_moisture(soilVol,MOISTURE_UPPER_BOUND,MOISTURE_LOWER_BOUND)
             print(soilVol)
             print(soildPer) 
