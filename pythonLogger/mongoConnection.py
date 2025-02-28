@@ -17,6 +17,7 @@ async def main():
     test = TempModel(temp=1, ADraw=100, ADvolt=100)
     await test.insert()
     out = await TempModel.find_all().to_list()
+    print("jsem tu")
     print(out)
 
 asyncio.run(main())
