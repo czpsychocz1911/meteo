@@ -16,5 +16,7 @@ async def main():
     await initDB()
     test = TempModel(temp=1, ADraw=100, ADvolt=100)
     await test.insert()
+    out = await TempModel.find_all().to_list()
+    print(out)
 
 asyncio.run(main())
