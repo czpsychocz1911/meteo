@@ -6,6 +6,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 from mongoConnection import get_mongo_connection
 from soilMoisture import read_soil_values, calculate_percentage_value_moisture, sensorValue as soilEnum
 
+#ADS.P1 is soil moisture sensor
 
 MOISTURE_LOWER_BOUND = 1.258
 MOISTURE_UPPER_BOUND = 3.4
@@ -22,8 +23,7 @@ def main():
         while True:
             soilVol = read_soil_values(ads,ADS.P1, soilEnum.VOLTAGE)
             soildPer = calculate_percentage_value_moisture(soilVol,MOISTURE_UPPER_BOUND,MOISTURE_LOWER_BOUND)
-            print(soilVol)
-            print(soildPer) 
+            SoilHumidity()
             time.sleep(1)
     except KeyboardInterrupt:
         print("Stopped by user")

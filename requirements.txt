@@ -7,8 +7,15 @@ adafruit-circuitpython-sht31d==2.3.26
 adafruit-circuitpython-typing==1.11.2
 Adafruit-PlatformDetect==3.77.0
 Adafruit-PureIO==1.1.11
+annotated-types==0.7.0
+beanie==1.29.0
 binho-host-adapter==0.1.6
+click==8.1.8
 dnspython==2.7.0
+lazy-model==0.2.0
+motor==3.7.0
+pydantic==2.10.6
+pydantic_core==2.27.2
 pyftdi==0.56.0
 pymongo==4.11.1
 pyserial==3.5
@@ -16,4 +23,5 @@ pyusb==1.3.1
 RPi.GPIO==0.7.1
 rpi_ws281x==5.0.0
 sysv_ipc==1.1.0
+toml==0.10.2
 typing_extensions==4.12.2
