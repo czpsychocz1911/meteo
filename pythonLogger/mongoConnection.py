@@ -29,8 +29,8 @@ async def logSoilModel():
     await SoilModel.insert(out)
 
 async def logTempHumidity():
-    temp = TempModel(temp=get_temp(),temp_unit=TempUnitsEnum.Celsius)
-    relHum = RelHumidityModel(relHum=get_relative_humidity())
+    temp = TempModel(temp=get_temp(i2c),temp_unit=TempUnitsEnum.Celsius)
+    relHum = RelHumidityModel(relHum=get_relative_humidity(i2c))
 
     await TempModel.insert(temp)
     await RelHumidityModel.insert(relHum)
