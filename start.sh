@@ -95,13 +95,13 @@ main(){
     echo "Setting up mongodb"
     setup_mongodb
 
-    echo "Starting python logger"
-    cd "$HOME/meteo"
-    setup_python_logger
-
     echo "Starting web application"
     cd "$HOME/meteo"
     start_webApp
+
+    echo "Starting python logger"
+    cd "$HOME/meteo"
+    setup_python_logger
 }
 
 main
