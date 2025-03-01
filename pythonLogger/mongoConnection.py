@@ -69,7 +69,7 @@ async def main():
                 nextTick = time() + MONGO_UPDATE_VALUE
             
 
-            print(read_from_redis(SensorRedisKeys.Temp))
+            print(await read_from_redis(SensorRedisKeys.Temp))
     except Exception as e:
         print(f"Error happened at: {e}")
     except KeyboardInterrupt:
