@@ -59,15 +59,16 @@ setup_python_logger(){
     if [ ! -d "env" ]; then
         python -m venv env
         echo "Virtual env created"
-    else 
+    else
         echo "Virtual env already exists."
     fi
-
     echo "Activating virtual env"
     source env/bin/activate
     pip install -r requirements.txt
     cd pythonLogger
-    python3 main.py
+    python3 main.py > "$LOGS_DIR/python_logger.log" 2>&1 &
+    echo $! > "$LOGS_DIR/python_logger.pid"
+    echo "Python logger started! Logs available at: $LOGS_DIR/python_logger.log"
 }
 
 start_webApp(){
