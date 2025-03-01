@@ -2,6 +2,7 @@ import redis
 import json
 from enum import Enum
 import time
+import logging
 
 class SensorRedisKeys(Enum):
     Soil = "soil"
@@ -14,9 +15,10 @@ REDIS_HISTORY_MAX_LEN = 100
 REDIS_HOST = "localhost"
 REDIS_HOST_PORT = "6379"
 
+logger = logging.getLogger("sensor_app")
 redis_client = redis.Redis(REDIS_HOST,REDIS_HOST_PORT)
 
-async def log_to_redis(sensor_type, data):
+async def log_to_redis(sensor_type : SensorRedisKeys, data):
     try:
         latest_key = f"{sensor_type.value}"
         history_key = f"{sensor_type.name.lower()}:history"
