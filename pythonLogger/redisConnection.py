@@ -33,12 +33,15 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data):
             "data": data_dict
         }
         
+        print(timestamped_data)
+        print("budu updatovat")
         json_data = json.dumps(timestamped_data)
         redis_client.set(latest_key, json_data)
         redis_client.expire(latest_key, REDIS_EXPIRY)
         redis_client.lpush(history_key, json_data)
         redis_client.ltrim(history_key, 0, REDIS_HISTORY_MAX_LEN - 1)
         redis_client.expire(history_key, REDIS_EXPIRY)
+        print("pridal jsem vsse")
 
     except Exception as e:
         print(f"Redis error: {e}")
