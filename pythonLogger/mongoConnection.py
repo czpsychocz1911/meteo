@@ -8,6 +8,9 @@ import adafruit_ads1x15.ads1115 as ADS
 from soilMoisture import read_soil_values, calculate_percentage_value_moisture, sensorValue as soilEnum
 from humidityTemp import get_temp, get_relative_humidity
 from time import sleep
+from redisConnection import log_to_redis, SensorRedisKeys
+
+
 
 models = [BaseDocument, SoilModel, TempModel , RelHumidityModel ] 
 
@@ -26,12 +29,16 @@ async def logSoilModel():
 
     out = SoilModel(ADraw=soilRawValue,ADvolt=soilVoltage,soilHumidity=soilPercentage)
 
+    await log_to_redis(SensorRedisKeys.Soil,out)
     await SoilModel.insert(out)
 
 async def logTempHumidity():
     temp = TempModel(temp=get_temp(i2c),temp_unit=TempUnitsEnum.Celsius)
     relHum = RelHumidityModel(relHum=get_relative_humidity(i2c))
 
+    await log_to_redis(SensorRedisKeys.Temp, temp)
+    await log_to_redis(SensorRedisKeys.Humidity, relHum)
+    
     await TempModel.insert(temp)
     await RelHumidityModel.insert(relHum)
 
