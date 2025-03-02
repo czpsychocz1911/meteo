@@ -23,6 +23,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger('redis_operations')
 
+redis_client = None
+
 async def init_redis(host=REDIS_HOST_PORT,port=REDIS_HOST_PORT ):
 
     global redis_client
