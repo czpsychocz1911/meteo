@@ -1,10 +1,10 @@
 import asyncio
-import datetime
 import redis.asyncio as redis
 import json
 from enum import Enum
 import time
 import logging
+from beanie import Document
 
 class SensorRedisKeys(Enum):
     Soil = "soil"
@@ -26,12 +26,6 @@ logger = logging.getLogger('redis_operations')
 
 redis_client = None
 
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime):
-            return obj.isoformat()
-        return super().default(obj)
-
 async def init_redis(host=REDIS_HOST,port=REDIS_HOST_PORT ):
 
     global redis_client
@@ -48,7 +42,7 @@ async def init_redis(host=REDIS_HOST,port=REDIS_HOST_PORT ):
         logger.error(f"Redis connection error: {e}")
         return False
 
-async def log_to_redis(sensor_type : SensorRedisKeys, data):
+async def log_to_redis(sensor_type : SensorRedisKeys, data : Document):
     try:
         # Define the keys
         latest_key = f"{sensor_type.value}"
@@ -59,7 +53,7 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data):
         # Convert to dictionary if object has dict method
         if hasattr(data, 'dict'):
             logger.info("Converting Pydantic/data model to dictionary")
-            data_dict = data.dict()
+            data_dict = data.model_dump(mode=str)
         else:
             logger.info("Using data as dictionary directly")
             data_dict = data
@@ -72,7 +66,7 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data):
        
         # Convert to JSON
         logger.info(f"Converting data to JSON: {timestamped_data}")
-        json_data = json.dumps(timestamped_data, cls=DateTimeEncoder)
+        json_data = json.dumps(timestamped_data)
         
         # Store latest value
         logger.info(f"SET operation: key={latest_key}, size={len(json_data)} bytes")
