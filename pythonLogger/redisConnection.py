@@ -42,7 +42,7 @@ async def init_redis(host=REDIS_HOST,port=REDIS_HOST_PORT ):
         logger.error(f"Redis connection error: {e}")
         return False
 
-async def log_to_redis(sensor_type : SensorRedisKeys, data : Document):
+async def log_to_redis(sensor_type : SensorRedisKeys, data):
     try:
         # Define the keys
         latest_key = f"{sensor_type.value}"
@@ -53,7 +53,7 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data : Document):
         # Add timestamp
         timestamped_data = {
             "timestamp": int(time.time()),
-            "data": data.model_dump(mode=str)
+            "data": data
         }
        
         # Convert to JSON
