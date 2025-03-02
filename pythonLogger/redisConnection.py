@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import redis.asyncio as redis
 import json
 from enum import Enum
@@ -24,6 +25,12 @@ logging.basicConfig(
 logger = logging.getLogger('redis_operations')
 
 redis_client = None
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
 
 async def init_redis(host=REDIS_HOST,port=REDIS_HOST_PORT ):
 
@@ -65,7 +72,7 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data):
        
         # Convert to JSON
         logger.info(f"Converting data to JSON: {timestamped_data}")
-        json_data = json.dumps(timestamped_data)
+        json_data = json.dumps(timestamped_data, cls=DateTimeEncoder)
         
         # Store latest value
         logger.info(f"SET operation: key={latest_key}, size={len(json_data)} bytes")
