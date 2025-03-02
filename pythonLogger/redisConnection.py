@@ -44,40 +44,32 @@ async def init_redis(host=REDIS_HOST,port=REDIS_HOST_PORT ):
 
 async def log_to_redis(sensor_type : SensorRedisKeys, data):
     try:
-        # Define the keys
         latest_key = f"{sensor_type.value}"
         history_key = f"{sensor_type.name.lower()}:history"
         
         logger.info(f"Preparing data for Redis: type={sensor_type.name}, keys=[{latest_key}, {history_key}]")
            
-        # Add timestamp
         timestamped_data = {
             "timestamp": int(time.time()),
             "data": data.model_dump_json(),
         }
        
-        # Convert to JSON
         logger.info(f"Converting data to JSON: {timestamped_data}")
         json_data = str(timestamped_data)
         
-        # Store latest value
         logger.info(f"SET operation: key={latest_key}, size={len(json_data)} bytes")
         await redis_client.set(latest_key, json_data)
         
-        # Set expiry on latest value
         logger.info(f"EXPIRE operation: key={latest_key}, ttl={REDIS_EXPIRY} seconds")
         await redis_client.expire(latest_key, REDIS_EXPIRY)
         
-        # Push to history list
         logger.info(f"LPUSH operation: key={history_key}, adding new data point")
         length = await redis_client.lpush(history_key, json_data)
         logger.info(f"After LPUSH, list now has {length} items")
         
-        # Trim history list
         logger.info(f"LTRIM operation: key={history_key}, keeping items 0-{REDIS_HISTORY_MAX_LEN - 1}")
         await redis_client.ltrim(history_key, 0, REDIS_HISTORY_MAX_LEN - 1)
         
-        # Set expiry on history list
         logger.info(f"EXPIRE operation: key={history_key}, ttl={REDIS_EXPIRY} seconds")
         await redis_client.expire(history_key, REDIS_EXPIRY)
         
