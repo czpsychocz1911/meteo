@@ -7,7 +7,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from soilMoisture import read_soil_values, calculate_percentage_value_moisture, sensorValue as soilEnum
 from humidityTemp import get_temp, get_relative_humidity
 from time import sleep, time
-from redisConnection import log_to_redis, SensorRedisKeys, read_from_redis, redis_client, init_redis
+from redisConnection import log_to_redis, SensorRedisKeys, read_from_redis, init_redis, redis_client
 import asyncio
 
 models = [BaseDocument, SoilModel, TempModel , RelHumidityModel ] 
