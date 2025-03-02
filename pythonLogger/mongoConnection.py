@@ -7,7 +7,8 @@ import adafruit_ads1x15.ads1115 as ADS
 from soilMoisture import read_soil_values, calculate_percentage_value_moisture, sensorValue as soilEnum
 from humidityTemp import get_temp, get_relative_humidity
 from time import sleep, time
-from redisConnection import log_to_redis, SensorRedisKeys, read_from_redis
+from redisConnection import log_to_redis, SensorRedisKeys, read_from_redis, redis_client, init_redis
+import asyncio
 
 models = [BaseDocument, SoilModel, TempModel , RelHumidityModel ] 
 
@@ -55,6 +56,7 @@ async def initDB(mongodb_url: str = "mongodb://localhost:28080", db_name: str = 
 async def main():
     try:
         await initDB()
+        await init_redis()
         nextTick = time() + MONGO_UPDATE_VALUE
         while(True):
 
@@ -63,7 +65,7 @@ async def main():
             await logSoilModel(mongoUpdate)
             await logTempHumidity(mongoUpdate)
 
-            sleep(SENSOR_UPDATE_VALUE)
+            await asyncio.sleep(SENSOR_UPDATE_VALUE)
 
             if(mongoUpdate):
                 nextTick = time() + MONGO_UPDATE_VALUE
@@ -74,3 +76,6 @@ async def main():
         print(f"Error happened at: {e}")
     except KeyboardInterrupt:
         print("Program terminated by user")
+    finally:
+        if redis_client:
+            redis_client.close()
