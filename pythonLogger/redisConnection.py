@@ -58,7 +58,7 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data):
        
         # Convert to JSON
         logger.info(f"Converting data to JSON: {timestamped_data}")
-        json_data = json.dumps(timestamped_data)
+        json_data = str(json.dumps(timestamped_data))
         
         # Store latest value
         logger.info(f"SET operation: key={latest_key}, size={len(json_data)} bytes")
