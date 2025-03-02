@@ -49,19 +49,11 @@ async def log_to_redis(sensor_type : SensorRedisKeys, data : Document):
         history_key = f"{sensor_type.name.lower()}:history"
         
         logger.info(f"Preparing data for Redis: type={sensor_type.name}, keys=[{latest_key}, {history_key}]")
-        
-        # Convert to dictionary if object has dict method
-        if hasattr(data, 'dict'):
-            logger.info("Converting Pydantic/data model to dictionary")
-            data_dict = data.model_dump(mode=str)
-        else:
-            logger.info("Using data as dictionary directly")
-            data_dict = data
            
         # Add timestamp
         timestamped_data = {
             "timestamp": int(time.time()),
-            "data": data_dict
+            "data": data.model_dump(mode=str)
         }
        
         # Convert to JSON
