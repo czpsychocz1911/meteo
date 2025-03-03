@@ -9,6 +9,7 @@ export const TestComp : React.FC = () => {
     const fetchedData = async() => {
         return Meteor.callAsync("get.sensor.data").then((res) => {
             console.log(res)
+            setData(res)
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
@@ -21,6 +22,10 @@ export const TestComp : React.FC = () => {
             await fetchedData()
         }
 
+        console.log(dataUr)
+
+        console.log(data,"REAL")
+
         const interval = Meteor.setInterval(fetchedData, 1000)
 
         return () => Meteor.clearInterval(interval)
@@ -28,7 +33,7 @@ export const TestComp : React.FC = () => {
 
     return(
         <p>
-            {data?.humidity.data.relHum || "asdf"}
+            asdf
         </p>
     )
 }
