@@ -33,7 +33,7 @@ export const TestComp : React.FC = () => {
 
     return(
         <>
-        {data ? <p>{data.humidity.data.relHum}</p>: <p>neni</p>}
+        <p>test</p>
         </>
     )
 }
