@@ -8,7 +8,7 @@ export const TestComp : React.FC = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    const fetchSensorData = () => {
+    const fetchSensorData =  async() => {
         setLoading(true)
         setError(null)
 
@@ -26,12 +26,16 @@ export const TestComp : React.FC = () => {
     }
 
     useEffect(() => {
-        fetchSensorData()
+        const fetchData = async () => {
+            await fetchSensorData()
+        }
+
+        fetchData()
 
         const interval = Meteor.setInterval(fetchSensorData,30000)
 
         return () => Meteor.clearInterval(interval)
-    },)
+    })
 
     return(
         <p>
