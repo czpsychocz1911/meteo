@@ -1,5 +1,11 @@
 import { Mongo } from 'meteor/mongo';
 
+export const SensorKeys = {
+  Soil: "soil",
+  Temp: "temp",
+  Humidity: "humidity"
+};
+
 enum TempUnitsEnum {
   Celsius = "C",
   Kelvin = "K",
