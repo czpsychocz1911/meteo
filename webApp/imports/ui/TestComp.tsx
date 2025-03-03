@@ -11,7 +11,7 @@ export const TestComp : React.FC = () => {
             setData(res)
 
             console.log(res, "res its self")
-            console.log(() => (typeof res.humidity === "string"), "type of res.humidity")
+            console.log((typeof res.humidity === "string"), "type of res.humidity")
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
