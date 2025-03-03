@@ -1,6 +1,7 @@
 import { AppBar, Button, Menu, MenuItem, Stack } from "@mui/material";
 import React from "react";
 import { UserProfileModal } from "./UserProfileModal";
+import { MainAppBarSensorData } from "./MainAppBarSensorData";
 
 export const MainAppBar: React.FC = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -24,6 +25,7 @@ export const MainAppBar: React.FC = () => {
 					<Button onClick={handleMenu} color="secondary" variant="contained" sx={{marginRight: "0px"}}>
 						Open user settings
 					</Button>
+					<MainAppBarSensorData/>
 					<Menu
 						anchorEl={anchorEl}
 						open={Boolean(anchorEl)}
