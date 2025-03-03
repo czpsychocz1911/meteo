@@ -49,8 +49,8 @@ async def logTempHumidity(mongoUpdate: bool):
         await RelHumidityModel.insert(relHum)
 
 async def initDB(mongodb_url: str = "mongodb://localhost:28080", db_name = "meteor"):
-    mongo_client = AsyncIOMotorClient(host="localhost",port=28080)
-    db = mongo_client()
+    mongo_client = AsyncIOMotorClient(host="localhost", port=28080)
+    db = mongo_client[db_name]  # Access the database using square brackets
     await init_beanie(database=db, document_models=models)
 
 async def main():
