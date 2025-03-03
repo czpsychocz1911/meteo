@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import React, { useEffect, useState } from "react";
 import type { HumidityData, ParsedHumidity, ParsedSensorData, ParsedSoil, ParsedTemp, SensorData, SoilData, TempData } from "../api/links";
 import JSON5 from 'json5'
+import { SensorComp } from "./SensorComp";
 
 
 
@@ -59,7 +60,9 @@ export const SensorDataComp : React.FC = () => {
 
     return(
         <>
-        
+        <SensorComp value={data?.humidity.data.relHum ?? ""} unit={"%"}/> 
+        <SensorComp value={data?.soil.data.soilHumidity ?? ""} unit={"%"}/>
+        <SensorComp value={data?.temp.data.temp ?? ""} unit={data?.temp.data.temp_unit ?? "C"}/>
         </>
     )
 }
