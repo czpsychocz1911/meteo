@@ -34,17 +34,17 @@ export interface HumidityData extends BaseData {
 }
 
 export interface ParsedSoil {
-  timestamp: number;
+  timestamp: Date;
   data: SoilData;
 }
 
 export interface ParsedTemp {
-  timestamp: number;
+  timestamp: Date;
   data: TempData;
 }
 
 export interface ParsedHumidity {
-  timestamp: number;
+  timestamp: Date;
   data: HumidityData;
 }
 
