@@ -8,8 +8,10 @@ export const TestComp : React.FC = () => {
 
     const fetchedData = async() => {
         return Meteor.callAsync("get.sensor.data").then((res: SensorData) => {
-            console.log(res)
             setData(res)
+
+            console.log(res)
+            console.log(() => (typeof res.humidity === "string"))
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
@@ -21,10 +23,6 @@ export const TestComp : React.FC = () => {
         const dataUr = async() => {
             await fetchedData()
         }
-
-        console.log(dataUr)
-
-        console.log(data,"REAL")
 
         const interval = Meteor.setInterval(fetchedData, 1000)
 
