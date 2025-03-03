@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { SensorDataResponse } from "../api/methods/redisMethods";
 
 export const TestComp : React.FC = () => {
@@ -24,6 +24,14 @@ export const TestComp : React.FC = () => {
             }
         })
     }
+
+    useEffect(() => {
+        fetchSensorData()
+
+        const interval = Meteor.setInterval(fetchSensorData,30000)
+
+        return () => Meteor.clearInterval(interval)
+    },)
 
     return(
         <p>
