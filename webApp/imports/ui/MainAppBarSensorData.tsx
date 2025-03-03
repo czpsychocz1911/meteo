@@ -35,7 +35,7 @@ export const MainAppBarSensorData: React.FC = () => {
 
 	return (
         <>
-        {data ? <SensorDataComp unit={"%"} value={data.humidity.relHum}/>:<p>no succ</p>}
+        <p>{data?.humidity.relHum}</p>
         </>
     )
 };
