@@ -1,12 +1,15 @@
 import { Meteor } from "meteor/meteor";
 import React, { useEffect, useState } from "react";
-import type { SensorDataResponse } from "../api/methods/redisMethods";
+import type { SensorData } from "../api/links";
 
 export const TestComp : React.FC = () => {
+
+    const [data, setData] = useState<SensorData>()
 
     const fetchedData = async() => {
         return Meteor.callAsync("get.sensor.data").then((res) => {
             console.log(res)
+
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
@@ -15,7 +18,7 @@ export const TestComp : React.FC = () => {
     }
 
     useEffect(() => {
-        const data = async() => {
+        const dataUr = async() => {
             await fetchedData()
         }
 
@@ -26,7 +29,7 @@ export const TestComp : React.FC = () => {
 
     return(
         <p>
-            ASDF
+            {data}
         </p>
     )
 }

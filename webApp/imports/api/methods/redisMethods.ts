@@ -1,15 +1,9 @@
 import { Meteor } from "meteor/meteor";
-import { type RelHumidityModel, SensorKeys, type SoilModel, type TempModel } from "../links";
 import { Redis } from "/server/redis";
+import { HumidityData, ParsedHumidity, ParsedSoil, ParsedTemp, SensorData, SensorKeys, SoilData, TempData } from "../links";
 
-export interface sensorData {
-    soil: SoilModel,
-    temp: TempModel,
-    humidity: RelHumidityModel,
-    timestamp: Date
-}
 
-export type SensorDataResponse = sensorData | null
+export type SensorDataResponse = SensorData | null
 
 let cachedSensorData: SensorDataResponse = null
 let lastFetchTime = 0
@@ -28,9 +22,9 @@ Meteor.methods({
         }
 
         try {
-            const soilData : SoilModel = await Redis.get(SensorKeys.Soil)
-            const tempData : TempModel = await Redis.get(SensorKeys.Temp,true)
-            const humidityData : RelHumidityModel = await Redis.get(SensorKeys.Humidity,true)
+            const soilData : ParsedSoil = await Redis.get(SensorKeys.Soil)
+            const tempData : ParsedTemp = await Redis.get(SensorKeys.Temp,true)
+            const humidityData : ParsedHumidity = await Redis.get(SensorKeys.Humidity,true)
             
             cachedSensorData = {
                 soil: soilData,
@@ -40,7 +34,6 @@ Meteor.methods({
             }
     
             lastFetchTime = now
-            console.log(cachedSensorData)
             return cachedSensorData
         } catch (err) {
             console.error("Error fetching data from redis", err)

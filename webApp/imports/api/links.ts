@@ -12,36 +12,50 @@ enum TempUnitsEnum {
   Fahrenheit = "F",
 }
 
-export interface Link {
-  _id?: string;
-  title: string;
-  url: string;
-  createdAt: Date;
-}
-
-export interface BaseModel {
-  _id: string,
+export interface BaseData {
+  _id: string
   createdAt: Date
   updatedAt: Date
 }
 
-export type SoilModel = BaseModel & {
-  soilHumidity: number
-  ADraw: number
-  ADvolt: number
+export interface SoilData extends BaseData {
+  soilHumidity: number;
+  ADraw: number;
+  ADvolt: number;
 }
 
-export type TempModel = BaseModel & {
+export interface TempData extends BaseData {
   temp: number
-  temp_unit: TempUnitsEnum
+  temp_unit: "C" | "F" | "K"
 }
 
-export type RelHumidityModel = BaseModel & {
-  relHum : number
+export interface HumidityData extends BaseData {
+  relHum: number
 }
 
-export const LinksCollection = new Mongo.Collection<Link>('links')
-export const SoilModelCollection = new Mongo.Collection<SoilModel>("soil_moisture")
-export const TempModelCollection = new Mongo.Collection<TempModel>("temperature")
-export const RelHumidityModelCollection = new Mongo.Collection<RelHumidityModel>("relative_humidity")
+export interface ParsedSoil {
+  timestamp: number;
+  data: SoilData;
+}
+
+export interface ParsedTemp {
+  timestamp: number;
+  data: TempData;
+}
+
+export interface ParsedHumidity {
+  timestamp: number;
+  data: HumidityData;
+}
+
+export interface SensorData {
+  soil: ParsedSoil;
+  temp: ParsedTemp;
+  humidity: ParsedHumidity;
+  timestamp: Date;
+}
+
+export const SoilModelCollection = new Mongo.Collection<SoilData>("soil_moisture")
+export const TempModelCollection = new Mongo.Collection<TempData>("temperature")
+export const RelHumidityModelCollection = new Mongo.Collection<HumidityData>("relative_humidity")
 
