@@ -38,33 +38,10 @@ stop_webapp() {
     fi
 }
 
-stop_mongodb() {
-    echo "Stopping MongoDB server..."
-    if netstat -tuln | grep ":$MONGODB_PORT " > /dev/null; then
-        echo "MongoDB is running on port $MONGODB_PORT. Shutting down..."
-        if [ -f "$MONGODB_DIR/mongod" ]; then
-            "$MONGODB_DIR/mongod" --dbpath "/data/db/test_db" --shutdown
-            echo "MongoDB shutdown complete."
-        else
-            echo "MongoDB binaries not found. Trying to kill process..."
-            PID=$(lsof -i :$MONGODB_PORT -t)
-            if [ ! -z "$PID" ]; then
-                echo "Killing MongoDB process (PID: $PID)"
-                kill $PID
-            else
-                echo "Couldn't identify MongoDB process."
-            fi
-        fi
-    else
-        echo "MongoDB not running on port $MONGODB_PORT."
-    fi
-}
-
 main() {
     echo "Stopping all services..."
     stop_python_logger
     stop_webapp
-    stop_mongodb
     
     echo "All services stopped."
 }
