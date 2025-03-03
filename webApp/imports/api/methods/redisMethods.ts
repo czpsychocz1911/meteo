@@ -22,14 +22,14 @@ Meteor.methods({
         }
 
         try {
-            const soilData : string = await Redis.get(SensorKeys.Soil)
-            const tempData : string = await Redis.get(SensorKeys.Temp,true)
-            const humidityData : string = await Redis.get(SensorKeys.Humidity,true)
+            const soilData : ParsedSoil = await Redis.get(SensorKeys.Soil)
+            const tempData : ParsedTemp = await Redis.get(SensorKeys.Temp,true)
+            const humidityData : ParsedHumidity = await Redis.get(SensorKeys.Humidity,true)
             
             cachedSensorData = {
-                soil: JSON.parse(soilData),
-                temp: JSON.parse(tempData),
-                humidity: JSON.parse(humidityData),
+                soil: soilData,
+                temp: tempData,
+                humidity: humidityData,
                 timestamp: new Date()
             }
     
