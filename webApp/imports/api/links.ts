@@ -49,10 +49,9 @@ export interface ParsedHumidity {
 }
 
 export interface SensorData {
-  soil: ParsedSoil;
-  temp: ParsedTemp;
-  humidity: ParsedHumidity;
-  timestamp: Date;
+  soil: string
+  temp: string
+  humidity: string
 }
 
 export const SoilModelCollection = new Mongo.Collection<SoilData>("soil_moisture")
