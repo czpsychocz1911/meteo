@@ -2,16 +2,21 @@ import { Meteor } from "meteor/meteor";
 import React, { useEffect, useState } from "react";
 import type { SensorData } from "../api/links";
 
+
+
 export const TestComp : React.FC = () => {
 
     const [data, setData] = useState<SensorData>()
 
     const fetchedData = async() => {
         return Meteor.callAsync("get.sensor.data").then((res: SensorData) => {
-            setData(res)
+            const resHumStr = res.humidity
+            const resSoilStr = res.soil
+            const resTempStr = res.temp
 
-            const test = JSON.parse(res.humidity)
-            console.log(test)
+            console.log(resHumStr)
+            console.log(resSoilStr)
+            console.log(resTempStr)
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)

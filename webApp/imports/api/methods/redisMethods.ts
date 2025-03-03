@@ -30,7 +30,6 @@ Meteor.methods({
             }
     
             lastFetchTime = now
-            console.log(cachedSensorData)
             return cachedSensorData
         } catch (err) {
             console.error("Error fetching data from redis", err)
