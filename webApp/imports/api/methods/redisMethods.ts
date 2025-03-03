@@ -2,7 +2,16 @@ import { Meteor } from "meteor/meteor";
 import { type RelHumidityModel, SensorKeys, type SoilModel, type TempModel } from "../links";
 import { Redis } from "/server/redis";
 
-let cachedSensorData: { soil: SoilModel; temp: TempModel; humidity: RelHumidityModel; timestamp: Date; } | null = null
+export interface sensorData {
+    soil: SoilModel,
+    temp: TempModel,
+    humidity: RelHumidityModel,
+    timestamp: Date
+}
+
+export type SensorDataResponse = sensorData | null
+
+let cachedSensorData: SensorDataResponse = null
 let lastFetchTime = 0
 const CACHE_TTL = 500
 
