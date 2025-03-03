@@ -28,6 +28,8 @@ export const MainAppBarSensorData: React.FC = () => {
         }
         funf()
 
+        console.log(data)
+
         const interval = Meteor.setInterval(fetchedData, 1000)
 
         return () => Meteor.clearInterval(interval)
@@ -35,7 +37,6 @@ export const MainAppBarSensorData: React.FC = () => {
 
 	return (
         <>
-        <p>{data?.humidity.relHum}</p>
         </>
     )
 };
