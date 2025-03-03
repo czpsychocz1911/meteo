@@ -54,7 +54,7 @@ export interface SensorData {
   humidity: string
 }
 
-export type ParsedSensorData {
+export type ParsedSensorData = {
   soil: ParsedSoil
   temp: ParsedTemp
   humidity: ParsedHumidity
