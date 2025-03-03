@@ -9,7 +9,6 @@ export const TestComp : React.FC = () => {
     const fetchedData = async() => {
         return Meteor.callAsync("get.sensor.data").then((res) => {
             console.log(res)
-            setData(res)
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
