@@ -28,7 +28,7 @@ Meteor.methods({
         }
 
         try {
-            const soilData : SoilModel = await Redis.get(SensorKeys.Soil,true)
+            const soilData : SoilModel = await Redis.get(SensorKeys.Soil)
             const tempData : TempModel = await Redis.get(SensorKeys.Temp,true)
             const humidityData : RelHumidityModel = await Redis.get(SensorKeys.Humidity,true)
             
