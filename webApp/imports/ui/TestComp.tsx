@@ -10,7 +10,7 @@ export const TestComp : React.FC = () => {
         return Meteor.callAsync("get.sensor.data").then((res: SensorData) => {
             setData(res)
 
-            console.log(res)
+            console.log(JSON.parse(res.humidity))
         }).catch((err) => {
             if(err instanceof Meteor.Error){
                 console.error(err)
