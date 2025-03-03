@@ -28,7 +28,7 @@ export const TestComp : React.FC = () => {
 
     return(
         <p>
-            {data?.humidity.data.relHum}
+            {data?.humidity.data.relHum || "asdf"}
         </p>
     )
 }
