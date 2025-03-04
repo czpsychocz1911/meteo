@@ -14,16 +14,19 @@ export const MainContentPaper: React.FC = () => {
 						value={sensorData?.humidity.data.relHum ?? 0}
 						valMax={100}
 						valMin={0}
+                        name="Humidity"
 					/>
 					<SensorDataCard
 						value={sensorData?.temp.data.temp ?? 0}
 						valMax={40}
 						valMin={20}
+                        name="Temperature"
 					/>
 					<SensorDataCard
 						value={sensorData?.soil.data.soilHumidity ?? 0}
 						valMin={0}
-						valMax={0}
+						valMax={100}
+                        name="Soil humidty"
 					/>
 				</Stack>
 			</Paper>
