@@ -11,12 +11,12 @@ function roundValue(val : string | number, roundValue : number){
     return formattedNumber.replace(/\.?0+$/, '');
 }
 
-export const SensorComp : React.FC<{value : string | number, unit: string, roundDef? : number}> = ({value, unit, roundDef = 1}) => {
+export const SensorComp : React.FC<{value : string | number, unit: string, roundDef? : number, sensorType: string}> = ({value, unit, roundDef = 1, sensorType}) => {
 
     return(
-        <Stack direction="column" spacing={2}>
-            <p>{roundValue(value,roundDef)}</p>
-            <p>{unit}</p>
+        <Stack direction="column" spacing={1}>
+            <p>{sensorType}</p>
+            <p>{roundValue(value,roundDef)}{unit}</p>
         </Stack>
     )
 }

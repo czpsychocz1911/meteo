@@ -60,9 +60,9 @@ export const SensorDataComp : React.FC = () => {
 
     return(
         <>
-        <SensorComp value={data?.humidity.data.relHum ?? ""} unit={"%"}/> 
-        <SensorComp value={data?.soil.data.soilHumidity ?? ""} unit={"%"}/>
-        <SensorComp value={data?.temp.data.temp ?? ""} unit={data?.temp.data.temp_unit ?? "C"}/>
+        <SensorComp value={data?.humidity.data.relHum ?? ""} unit={"%"} sensorType="Relative humidity"/> 
+        <SensorComp value={data?.soil.data.soilHumidity ?? ""} unit={"%"} sensorType="Soil humidity"/>
+        <SensorComp value={data?.temp.data.temp ?? ""} unit={data?.temp.data.temp_unit ?? "C"} sensorType="Temperature"/>
         </>
     )
 }
