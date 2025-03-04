@@ -82,7 +82,7 @@ export const GraphContentPaper : React.FC = () => {
 
     return(
         <Paper elevation={3}>
-            <LineChart series={[{data: y}]} xAxis={[{data: x}]}/>
+            <LineChart series={[{data: y}]} xAxis={[{data: x}]} height={500} width={500}/>
         </Paper>
     )
 }
