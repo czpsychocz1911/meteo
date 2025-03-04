@@ -1,5 +1,5 @@
 import React from "react"
-import { MainAppBar } from "./MainAppBar"
+import { MainAppBar } from "./AppBar/MainAppBar"
 
 export const MainPage: React.FC = () => {
 

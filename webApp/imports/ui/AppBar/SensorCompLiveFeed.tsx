@@ -1,6 +1,6 @@
 import React from "react";
 import { SensorComp } from "./SensorComp";
-import { useSensorData } from "./SensorDataContext";
+import { useSensorData } from "../SensorDataContext";
 
 export const SensorCompLiveFeed: React.FC = () => {
     const { sensorData } = useSensorData();

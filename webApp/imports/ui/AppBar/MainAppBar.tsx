@@ -2,7 +2,7 @@ import { AppBar, Button, Menu, MenuItem, Stack } from "@mui/material";
 import React from "react";
 import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
-import { SensorDataProvider } from "./SensorDataContext";
+import { SensorDataProvider } from "../SensorDataContext";
 
 export const MainAppBar: React.FC = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
