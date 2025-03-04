@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { HumidityData, ParsedHumidity, ParsedSensorData, ParsedSoil, ParsedTemp, SensorData, SoilData, TempData } from "../api/links";
-import JSON5 from 'json5';
+import type { ParsedSensorData, SensorData } from "../api/links";
+import { getSensorData } from "/server/helpers/utils";
 
 type SensorContextType = {
   sensorData: ParsedSensorData | undefined;
@@ -20,33 +20,8 @@ export const SensorDataProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     try {
       setLoading(true);
       const res: SensorData = await Meteor.callAsync("get.sensor.data");
-      
-      const humStep: {timestamp: Date, data: string} = JSON5.parse(res.humidity);
-      const humStep2: HumidityData = JSON5.parse(humStep.data);
-      const humRes: ParsedHumidity = {
-        timestamp: humStep.timestamp,
-        data: humStep2
-      };
-      
-      const soilStep: {timestamp: Date, data: string} = JSON5.parse(res.soil);
-      const soilStep2: SoilData = JSON5.parse(soilStep.data);
-      const soilRes: ParsedSoil = {
-        timestamp: soilStep.timestamp,
-        data: soilStep2
-      };
-      
-      const tempStep: {timestamp: Date, data: string} = JSON5.parse(res.temp);
-      const tempStep2: TempData = JSON5.parse(tempStep.data);
-      const tempRes: ParsedTemp = {
-        data: tempStep2,
-        timestamp: tempStep.timestamp
-      };
-      
-      const result: ParsedSensorData = {
-        humidity: humRes,
-        soil: soilRes,
-        temp: tempRes
-      };
+
+      const result = getSensorData(res)
       
       setSensorData(result);
       setError(null);

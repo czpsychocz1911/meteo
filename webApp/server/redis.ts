@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { createClient, type RedisClientType } from 'redis';
+import { promisify } from 'util';
 
 class RedisService {
   private client: RedisClientType | null;
@@ -68,6 +69,30 @@ class RedisService {
     if (this.client && this.isConnected) {
       await this.client.disconnect();
       this.isConnected = false;
+    }
+  }
+
+  async lRange(key: string, start: number, stop: number, parseJson = true): Promise<any[] | null> {
+    if (!this.isConnected || !this.client) await this.initialize();
+    if (!this.client) return null;
+     
+    try {
+      const values = await this.client.lRange(key, start, stop);
+      if (!values || values.length === 0) return [];
+     
+      if (parseJson) {
+        return values.map(value => {
+          try {
+            return JSON.parse(value);
+          } catch (e) {
+            return value;
+          }
+        });
+      }
+      return values;
+    } catch (error) {
+      console.error(`Error executing lRange on key ${key}:`, error);
+      return null;
     }
   }
 }

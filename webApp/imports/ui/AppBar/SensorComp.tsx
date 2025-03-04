@@ -2,7 +2,6 @@ import { Stack } from "@mui/material";
 import React from "react";
 
 function roundValue(val : string | number, roundValue : number){
-    // If value is not a number, return it as is
     if (typeof val !== "number") {
         return val.toString();
     }
