@@ -1,7 +1,7 @@
 import { AppBar, Button, Menu, MenuItem, Stack } from "@mui/material";
 import React from "react";
 import { UserProfileModal } from "./UserProfileModal";
-import { SensorDataComp } from "./SensorDataComp";
+import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
 
 export const MainAppBar: React.FC = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -35,7 +35,7 @@ export const MainAppBar: React.FC = () => {
 						<MenuItem>Settings</MenuItem>
 						<MenuItem>Logout</MenuItem>
 					</Menu>
-					<SensorDataComp/>
+					<SensorCompLiveFeed/>
 				</Stack>
 			</AppBar>
 		</div>
