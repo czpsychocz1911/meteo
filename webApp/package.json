@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.4",
+    "@mui/x-charts": "^7.27.1",
     "@types/redis": "^4.0.10",
     "bcrypt": "^5.1.1",
     "meteor-node-stubs": "^1.2.5",
