@@ -25,7 +25,6 @@ export const MainAppBar: React.FC = () => {
 					<Button onClick={handleMenu} color="secondary" variant="contained" sx={{marginRight: "0px"}}>
 						Open user settings
 					</Button>
-					<SensorDataComp/>
 					<Menu
 						anchorEl={anchorEl}
 						open={Boolean(anchorEl)}
@@ -36,6 +35,7 @@ export const MainAppBar: React.FC = () => {
 						<MenuItem>Settings</MenuItem>
 						<MenuItem>Logout</MenuItem>
 					</Menu>
+					<SensorDataComp/>
 				</Stack>
 			</AppBar>
 		</div>
