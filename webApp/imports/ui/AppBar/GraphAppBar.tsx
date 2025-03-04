@@ -14,7 +14,7 @@ export const GraphAppBar: React.FC = () => {
 
 	const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-		navigate("./")
+		navigate(-1)
 	}
 	
 
