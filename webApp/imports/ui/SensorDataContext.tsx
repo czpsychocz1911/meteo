@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { ParsedSensorData, SensorData } from "../api/links";
-import { getSensorData } from "/server/helpers/utils";
+import { getSensorData } from "../api/helpers/utils";
 
 type SensorContextType = {
   sensorData: ParsedSensorData | undefined;
