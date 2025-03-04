@@ -1,10 +1,18 @@
 import { Paper } from "@mui/material";
 import { Meteor } from "meteor/meteor";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import type { HistoricalSensorData, HumidityData, ParsedHumidity, ParsedSoil, ParsedTemp, SoilData, TempData } from "/imports/api/links";
 import JSON5 from "json5"
+import { LineChart } from "@mui/x-charts";
 
 export const GraphContentPaper : React.FC = () => {
+
+    const [tempData, setTempData] = useState<ParsedTemp[]>([])
+    const [humData, setHumData] = useState<ParsedHumidity[]>([])
+    const [soilData, setSoilData] = useState<ParsedSoil[]>([])
+
+    const [x,setX] = useState<number[]>([])
+    const [y,setY] = useState<number[]>([])
 
     const fetchedHistoricalData = async () => {
         try{
@@ -47,7 +55,21 @@ export const GraphContentPaper : React.FC = () => {
                 soilHist.push(result)
             })
 
-            console.log(tempHist)
+            setTempData(tempHist)
+            setSoilData(soilHist)
+            setHumData(humHist)
+
+            const asdf : number[] = []
+            const wsdf : number[] = []
+            
+            // biome-ignore lint/complexity/noForEach: <explanation>
+            tempHist.forEach((val) => {
+                asdf.push(val.data.updatedAt.getMinutes())
+                wsdf.push(val.data.temp)    
+            })
+
+            setX(asdf)
+            setY(wsdf)
 
         } catch (err) {
             console.error(err)
@@ -60,7 +82,7 @@ export const GraphContentPaper : React.FC = () => {
 
     return(
         <Paper elevation={3}>
-
+            <LineChart series={[{data: y}]} xAxis={[{data: x}]}/>
         </Paper>
     )
 }
