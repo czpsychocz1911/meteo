@@ -11,6 +11,9 @@ export const MainAppBar: React.FC = () => {
 	};
 
 	const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null)
+	const handleMenu2 = (e: React.MouseEvent<HTMLButtonElement>) => {
+		setAnchorEl2(e.currentTarget)
+	}
 
 	return (
 		<div>
@@ -53,6 +56,14 @@ export const MainAppBar: React.FC = () => {
 						<MenuItem onClick={() => console.log("Happy")}>Item1</MenuItem>
 						<MenuItem>Item2</MenuItem>
 					</Menu>
+					<Button
+						onClick={handleMenu2}
+						color="secondary"
+						variant="contained"
+						sx={{ marginRight: "0px" }}
+					>
+						Open user settings
+					</Button>
 				</Stack>
 			</AppBar>
 		</div>
