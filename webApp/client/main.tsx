@@ -7,6 +7,7 @@ import { ProtectedRoute } from '../imports/ui/ProtectedRoute';
 import { MainPage } from '/imports/ui/MainPage';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { DarkModeToggle } from '/imports/ui/DarkModeToggle';
+import { GraphContentPaper } from '/imports/ui/ContentPage/GraphContentPaper';
 
 const getDefaultTheme = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -38,6 +39,14 @@ const App = () => {
         </ProtectedRoute>
       ),
     },
+    {
+      path: "/main/graphs",
+      element: (
+        <ProtectedRoute>
+          <GraphContentPaper/>
+        </ProtectedRoute>
+      )
+    }
   ]);
 
   return (
