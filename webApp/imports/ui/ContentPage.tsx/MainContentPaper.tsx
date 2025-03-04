@@ -9,7 +9,7 @@ export const MainContentPaper: React.FC = () => {
 	return (
 		<div>
 			<Paper elevation={3}>
-				<Stack direction="row" spacing={4} justifySelf="center" width="100%">
+				<Stack direction="row" spacing={4} justifySelf="center" width="100%" justifyContent="space-evenly">
 					<SensorDataCard
 						value={sensorData?.humidity.data.relHum ?? 0}
 						valMax={100}
