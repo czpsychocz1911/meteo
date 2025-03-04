@@ -3,17 +3,20 @@ import React from "react";
 import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
 import { SensorDataProvider } from "../SensorDataContext";
+import { useNavigate } from "react-router-dom";
 
 export const MainAppBar: React.FC = () => {
+	const navigate = useNavigate()
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(e.currentTarget);
 	};
 
-	const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null)
-	const handleMenu2 = (e: React.MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl2(e.currentTarget)
+	const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault()
+		navigate("./graphs")
 	}
+	
 
 	return (
 		<div>
@@ -48,21 +51,13 @@ export const MainAppBar: React.FC = () => {
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
 					</SensorDataProvider>
-					<Menu
-						anchorEl={anchorEl2}
-						open={Boolean(anchorEl2)}
-						onClose={() => setAnchorEl2(null)}
-					>
-						<MenuItem onClick={() => console.log("Happy")}>Item1</MenuItem>
-						<MenuItem>Item2</MenuItem>
-					</Menu>
 					<Button
-						onClick={handleMenu2}
+						onClick={(e) => handleNavigate(e)}
 						color="secondary"
 						variant="contained"
 						sx={{ marginRight: "0px" }}
 					>
-						Open user settings
+						Open graph page
 					</Button>
 				</Stack>
 			</AppBar>
