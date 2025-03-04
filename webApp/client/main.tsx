@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Meteor } from 'meteor/meteor';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Index } from '/imports/ui/Index';
-import { ProtectedRoute } from '/imports/ui/ProtectedRoute';
+import { ProtectedRoute } from '../imports/ui/ProtectedRoute';
 import { MainPage } from '/imports/ui/MainPage';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { DarkModeToggle } from '/imports/ui/DarkModeToggle';

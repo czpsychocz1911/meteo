@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@mui/x-charts": "^7.27.1",
-    "json5": "^2.2.3"
-  }
-}
