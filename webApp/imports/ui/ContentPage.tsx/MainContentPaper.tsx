@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-const SortableSensorCard = ({ id, ...props }) => {
+const SortableSensorCard = ({ id, value, valMin, valMax, name }) => {
   const {
     attributes,
     listeners,
@@ -36,7 +36,12 @@ const SortableSensorCard = ({ id, ...props }) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <SensorDataCard {...props} />
+      <SensorDataCard 
+        value={value} 
+        valMin={valMin} 
+        valMax={valMax} 
+        name={name} 
+      />
     </div>
   );
 };
@@ -48,21 +53,21 @@ export const MainContentPaper: React.FC = () => {
         {
             id: "humidity",
             name: "Humidity",
-            value: () => sensorData?.humidity.data.relHum ?? 0,
+            getValue: () => sensorData?.humidity.data.relHum ?? 0,
             valMax: 100,
             valMin: 0
         },
         {
             id: "temperature",
             name: "Temperature",
-            value: () => sensorData?.temp.data.temp ?? 0,
+            getValue: () => sensorData?.temp.data.temp ?? 0,
             valMax: 40,
             valMin: 20
         },
         {
             id: "soil",
             name: "Soil humidty",
-            value: () => sensorData?.soil.data.soilHumidity ?? 0,
+            getValue: () => sensorData?.soil.data.soilHumidity ?? 0,
             valMax: 100,
             valMin: 0
         }
@@ -111,7 +116,7 @@ export const MainContentPaper: React.FC = () => {
                                 <SortableSensorCard
                                     key={card.id}
                                     id={card.id}
-                                    value={card.value()}
+                                    value={card.getValue()}
                                     valMax={card.valMax}
                                     valMin={card.valMin}
                                     name={card.name}
