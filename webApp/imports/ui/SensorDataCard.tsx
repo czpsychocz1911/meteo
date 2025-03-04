@@ -11,7 +11,7 @@ export const SensorDataCard: React.FC<{
 	return (
 		<Card variant="elevation">
 			<CardContent>
-				<Stack direction="column" justifyContent="center">
+				<Stack direction="column" justifyContent="center" justifyItems="center">
 					<p>{name}</p>
 					<Gauge
 						width={200}
