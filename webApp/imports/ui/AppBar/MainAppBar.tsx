@@ -10,6 +10,8 @@ export const MainAppBar: React.FC = () => {
 		setAnchorEl(e.currentTarget);
 	};
 
+	const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null)
+
 	return (
 		<div>
 			<AppBar position="static">
@@ -43,6 +45,14 @@ export const MainAppBar: React.FC = () => {
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
 					</SensorDataProvider>
+					<Menu
+						anchorEl={anchorEl2}
+						open={Boolean(anchorEl2)}
+						onClose={() => setAnchorEl2(null)}
+					>
+						<MenuItem onClick={() => console.log("Happy")}>Item1</MenuItem>
+						<MenuItem>Item2</MenuItem>
+					</Menu>
 				</Stack>
 			</AppBar>
 		</div>
