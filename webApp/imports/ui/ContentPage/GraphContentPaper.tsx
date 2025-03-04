@@ -11,7 +11,7 @@ export const GraphContentPaper : React.FC = () => {
     const [humData, setHumData] = useState<ParsedHumidity[]>([])
     const [soilData, setSoilData] = useState<ParsedSoil[]>([])
 
-    const [x,setX] = useState<number[]>([])
+    const [x,setX] = useState<Date[]>([])
     const [y,setY] = useState<number[]>([])
 
     const fetchedHistoricalData = async () => {
@@ -59,12 +59,12 @@ export const GraphContentPaper : React.FC = () => {
             setSoilData(soilHist)
             setHumData(humHist)
 
-            const asdf : number[] = []
+            const asdf : Date[] = []
             const wsdf : number[] = []
             
             // biome-ignore lint/complexity/noForEach: <explanation>
             tempHist.forEach((val) => {
-                asdf.push(val.data.updatedAt.getMinutes())
+                asdf.push(val.data.updatedAt)
                 wsdf.push(val.data.temp)    
             })
 
