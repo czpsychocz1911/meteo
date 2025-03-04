@@ -2,6 +2,7 @@ import { AppBar, Button, Menu, MenuItem, Stack } from "@mui/material";
 import React from "react";
 import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
+import { SensorDataProvider } from "./SensorDataContext";
 
 export const MainAppBar: React.FC = () => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,20 +23,26 @@ export const MainAppBar: React.FC = () => {
 					paddingBottom={1}
 				>
 					<h1>Main Page</h1>
-					<Button onClick={handleMenu} color="secondary" variant="contained" sx={{marginRight: "0px"}}>
+					<Button
+						onClick={handleMenu}
+						color="secondary"
+						variant="contained"
+						sx={{ marginRight: "0px" }}
+					>
 						Open user settings
 					</Button>
 					<Menu
 						anchorEl={anchorEl}
 						open={Boolean(anchorEl)}
 						onClose={() => setAnchorEl(null)}
-						
 					>
-                        <UserProfileModal/>
+						<UserProfileModal />
 						<MenuItem>Settings</MenuItem>
 						<MenuItem>Logout</MenuItem>
 					</Menu>
-					<SensorCompLiveFeed/>
+					<SensorDataProvider>
+						<SensorCompLiveFeed />
+					</SensorDataProvider>
 				</Stack>
 			</AppBar>
 		</div>
