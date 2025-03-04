@@ -1,13 +1,13 @@
-import { CardContent } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import { Gauge } from "@mui/x-charts";
 import React from "react";
 
-export const SensorDataCard: React.FC = () => {
+export const SensorDataCard: React.FC<{ value: number, valMin: number , valMax: number }> = ({ value, valMin, valMax }) => {
 	return (
-		<React.Fragment>
+		<Card variant="elevation">
 			<CardContent>
-				<Gauge width={100} height={100} value={50} />
+				<Gauge width={200} height={400} value={value} valueMin={valMin} valueMax={valMax}/>
 			</CardContent>
-		</React.Fragment>
+		</Card>
 	);
 };
