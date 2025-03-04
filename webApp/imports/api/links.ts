@@ -54,6 +54,18 @@ export interface SensorData {
   humidity: string
 }
 
+export interface HistoricalSensorData {
+  humidity: string[]
+  temp: string[]
+  soil: string[]
+}
+
+export type ParsedHistoricalData = {
+  humidity: ParsedHumidity[]
+  temp: ParsedTemp[]
+  soil: ParsedSoil[]
+}
+
 export type ParsedSensorData = {
   soil: ParsedSoil
   temp: ParsedTemp
