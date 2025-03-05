@@ -4,25 +4,33 @@ import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
 import { SensorDataProvider } from "../SensorDataContext";
 import { useNavigate } from "react-router-dom";
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 export const GraphAppBar: React.FC = () => {
-	const navigate = useNavigate()
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-    const [graphAnchor, setGraphAnchor] = React.useState<null | HTMLElement>(null)
+	const navigate = useNavigate();
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [graphAnchor, setGraphAnchor] = React.useState<null | HTMLElement>(
+		null,
+	);
+	const [tableAnchor, setTableAnchor] = React.useState<null | HTMLElement>(
+		null,
+	);
 	const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(e.currentTarget);
 	};
 
-    const handleGraph = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setGraphAnchor(e.currentTarget)
-    }
+	const handleGraph = (e: React.MouseEvent<HTMLButtonElement>) => {
+		setGraphAnchor(e.currentTarget);
+	};
+
+	const handleTable = (e: React.MouseEvent<HTMLButtonElement>) => {
+		setGraphAnchor(e.currentTarget)
+	}
 
 	const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault()
-		navigate(-1)
-	}
-	
+		e.preventDefault();
+		navigate(-1);
+	};
 
 	return (
 		<div>
@@ -45,7 +53,7 @@ export const GraphAppBar: React.FC = () => {
 					>
 						Open user settings
 					</Button>
-                    <Button
+					<Button
 						onClick={(e) => handleNavigate(e)}
 						color="secondary"
 						variant="contained"
@@ -65,30 +73,47 @@ export const GraphAppBar: React.FC = () => {
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
 					</SensorDataProvider>
-                    <Button
-                        color="secondary"
-                        variant="contained"
-                        onClick={handleGraph}
-                        fullWidth={false}
-                    >
-                        <KeyboardDoubleArrowDownIcon/>
-                    </Button>
-                    <Menu
-                        anchorEl={graphAnchor}
-                        open={Boolean(graphAnchor)}
-                        onClose={() => setGraphAnchor(null)} 
-                    >
-                    <Button onClick={() => navigate("/main/graphs")}>Temperature graph</Button>
-                    <Button onClick={() => navigate("/main/graphs/soil")}>Soil humidity graph</Button>
-                    <Button onClick={() => navigate("/main/graphs/humidity")}>Humidity graph</Button>
-                    </Menu>
 					<Button
 						color="secondary"
 						variant="contained"
+						onClick={handleGraph}
 						fullWidth={false}
 					>
-						<KeyboardDoubleArrowDownIcon/>
+						<KeyboardDoubleArrowDownIcon />
 					</Button>
+					<Menu
+						anchorEl={graphAnchor}
+						open={Boolean(graphAnchor)}
+						onClose={() => setGraphAnchor(null)}
+					>
+						<Button onClick={() => navigate("/main/graphs")}>
+							Temperature graph
+						</Button>
+						<Button onClick={() => navigate("/main/graphs/soil")}>
+							Soil humidity graph
+						</Button>
+						<Button onClick={() => navigate("/main/graphs/humidity")}>
+							Humidity graph
+						</Button>
+					</Menu>
+					<Button color="secondary" variant="contained" fullWidth={false}>
+						<KeyboardDoubleArrowDownIcon />
+					</Button>
+					<Menu
+						anchorEl={tableAnchor}
+						open={Boolean(tableAnchor)}
+						onClose={() => setTableAnchor}
+					>
+						<Button onClick={() => navigate("/main/table")}>
+							Temperature table
+						</Button>
+						<Button onClick={() => navigate("/main/table/humidity")}>
+							Soil table
+						</Button>
+						<Button onClick={() => navigate("/main/table/soil")}>
+							Humidity table
+						</Button>
+					</Menu>
 				</Stack>
 			</AppBar>
 		</div>

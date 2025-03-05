@@ -63,6 +63,24 @@ const App = () => {
           <HumidityContentPaper/>
         </ProtectedRoute>
       )
+    },
+    {
+      path: "main/table",
+      element: (
+        <p>Table</p>
+      )
+    },
+    {
+      path: "main/table/humidity",
+      element: (
+        <p>Humidity</p>
+      )
+    },
+    {
+      path: "main/table/soil",
+      element: (
+        <p>Soil</p>
+      )
     }
   ]);
 
