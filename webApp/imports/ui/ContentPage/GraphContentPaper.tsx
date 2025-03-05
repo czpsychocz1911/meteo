@@ -11,7 +11,7 @@ export const GraphContentPaper : React.FC = () => {
     const [humData, setHumData] = useState<ParsedHumidity[]>([])
     const [soilData, setSoilData] = useState<ParsedSoil[]>([])
 
-    const [x,setX] = useState<Date[]>([])
+    const [x,setX] = useState<number[]>([])
     const [y,setY] = useState<number[]>([])
 
     const fetchedHistoricalData = async () => {
@@ -59,12 +59,12 @@ export const GraphContentPaper : React.FC = () => {
             setSoilData(soilHist)
             setHumData(humHist)
 
-            const asdf : Date[] = []
+            const asdf : number[] = []
             const wsdf : number[] = []
             
             // biome-ignore lint/complexity/noForEach: <explanation>
             tempHist.forEach((val) => {
-                asdf.push(val.data.updatedAt)
+                asdf.push(val.data.updatedAt.getTime())
                 wsdf.push(val.data.temp)    
             })
 
@@ -83,7 +83,7 @@ export const GraphContentPaper : React.FC = () => {
 
     return(
         <Paper elevation={3}>
-            <LineChart series={[{data: y}]} xAxis={[{data: x,scaleType: "time"}]} height={500} width={500}/>
+            <LineChart series={[{data: y},{data: x}]} xAxis={[{data: x,scaleType: "time"}]} height={500} width={500}/>
         </Paper>
     )
 }
