@@ -96,7 +96,7 @@ export const GraphAppBar: React.FC = () => {
 							Humidity graph
 						</Button>
 					</Menu>
-					<Button color="secondary" variant="contained" fullWidth={false}>
+					<Button color="secondary" variant="contained" fullWidth={false} onClick={handleTable}>
 						<KeyboardDoubleArrowDownIcon />
 					</Button>
 					<Menu
