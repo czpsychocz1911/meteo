@@ -36,7 +36,7 @@ export const GraphContentPaper : React.FC = () => {
             // biome-ignore lint/complexity/noForEach: <explanation>
             res.humidity.forEach((val) => {
                 const tmp : {timestamp: Date, data : string} = JSON5.parse(val)
-                const data : HumidityData = JSON5.parse(val)
+                const data : HumidityData = JSON5.parse(tmp.data)
                 const result : ParsedHumidity = {
                     data: data,
                     timestamp: tmp.timestamp
@@ -47,7 +47,7 @@ export const GraphContentPaper : React.FC = () => {
             // biome-ignore lint/complexity/noForEach: <explanation>
             res.soil.forEach((val) => {
                 const tmp : {timestamp: Date, data : string} = JSON5.parse(val)
-                const data : SoilData = JSON5.parse(val)
+                const data : SoilData = JSON5.parse(tmp.data)
                 const result : ParsedSoil = {
                     data: data,
                     timestamp: tmp.timestamp
@@ -83,7 +83,7 @@ export const GraphContentPaper : React.FC = () => {
 
     return(
         <Paper elevation={3}>
-            <LineChart series={[{data: y},{data: x}]} xAxis={[{data: x,scaleType: "time"}]} height={500} width={500}/>
+            <LineChart series={[{data: y},{data: x}]} xAxis={[{data: x,scaleType: "time"}]} height={500} sx={{width: "100%"}}/>
         </Paper>
     )
 }
