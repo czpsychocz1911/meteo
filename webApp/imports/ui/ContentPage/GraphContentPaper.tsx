@@ -4,20 +4,24 @@ import React, { useEffect, useState } from "react";
 import type { HistoricalSensorData, HumidityData, ParsedHumidity, ParsedSoil, ParsedTemp, SoilData, TempData } from "/imports/api/links";
 import JSON5 from "json5"
 import { LineChart } from "@mui/x-charts";
+
 export const GraphContentPaper : React.FC = () => {
+
     const [tempData, setTempData] = useState<ParsedTemp[]>([])
     const [humData, setHumData] = useState<ParsedHumidity[]>([])
     const [soilData, setSoilData] = useState<ParsedSoil[]>([])
+
     const [x,setX] = useState<Date[]>([])
     const [y,setY] = useState<number[]>([])
-    
+
     const fetchedHistoricalData = async () => {
         try{
             const res : HistoricalSensorData = await Meteor.callAsync("get.sensor.data.history")
-           
+            
             const tempHist : ParsedTemp[] = []
             const humHist : ParsedHumidity[] = []
             const soilHist : ParsedSoil[] = []
+
             // biome-ignore lint/complexity/noForEach: <explanation>
             res.temp.forEach((val) => {
                 const tmp : {timestamp: Date, data : string } = JSON5.parse(val)
@@ -28,6 +32,7 @@ export const GraphContentPaper : React.FC = () => {
                 }
                 tempHist.push(result)
             })
+
             // biome-ignore lint/complexity/noForEach: <explanation>
             res.humidity.forEach((val) => {
                 const tmp : {timestamp: Date, data : string} = JSON5.parse(val)
@@ -38,6 +43,7 @@ export const GraphContentPaper : React.FC = () => {
                 }
                 humHist.push(result)
             })
+
             // biome-ignore lint/complexity/noForEach: <explanation>
             res.soil.forEach((val) => {
                 const tmp : {timestamp: Date, data : string} = JSON5.parse(val)
@@ -48,71 +54,36 @@ export const GraphContentPaper : React.FC = () => {
                 }
                 soilHist.push(result)
             })
+
             setTempData(tempHist)
             setSoilData(soilHist)
             setHumData(humHist)
+
             const asdf : Date[] = []
             const wsdf : number[] = []
-           
+            
             // biome-ignore lint/complexity/noForEach: <explanation>
             tempHist.forEach((val) => {
                 asdf.push(val.data.updatedAt)
                 wsdf.push(val.data.temp)    
             })
+
             setX(asdf)
             setY(wsdf)
+
         } catch (err) {
             console.error(err)
         }
     }
-    
+
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         fetchedHistoricalData()
-    })
-    
-    const calculateYDomain = () => {
-        if (y.length === 0) return [0, 100]; 
-        
-        const firstValue = y[0];
-        const allValues = [...y];
-        const maxValue = Math.max(...allValues);
-        const minValue = Math.min(...allValues);
-        
-        const maxDistance = Math.max(
-            Math.abs(maxValue - firstValue),
-            Math.abs(firstValue - minValue)
-        );
-        
-        return [firstValue - maxDistance, firstValue + maxDistance];
-    };
-    
-    const yDomain = calculateYDomain();
-    
-    return (
-        <Paper elevation={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-            <LineChart 
-                series={[
-                    {
-                        data: y,
-                        label: 'Temperature',
-                        curve: 'linear'
-                    }
-                ]} 
-                xAxis={[
-                    {
-                        data: x,
-                        scaleType: 'time',
-                    }
-                ]}
-                yAxis={[
-                    {
-                        min: yDomain[0],
-                        max: yDomain[1]
-                    }
-                ]}
-                height={500} 
-                width={500}
-            />
+    },[])
+
+    return(
+        <Paper elevation={3}>
+            <LineChart series={[{data: y}]} xAxis={[{data: x,scaleType: "time"}]} height={500} width={500}/>
         </Paper>
     )
 }
