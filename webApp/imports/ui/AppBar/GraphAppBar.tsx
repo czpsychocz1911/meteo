@@ -69,6 +69,7 @@ export const GraphAppBar: React.FC = () => {
                         color="secondary"
                         variant="contained"
                         onClick={handleGraph}
+                        fullWidth={false}
                     >
                         <KeyboardDoubleArrowDownIcon/>
                     </Button>
