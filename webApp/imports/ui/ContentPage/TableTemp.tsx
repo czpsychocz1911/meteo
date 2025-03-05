@@ -6,46 +6,6 @@ import { Paper } from "@mui/material";
 import { Loader } from "../AppBar/Loader";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
-const cols: GridColDef[] = [
-    {
-        field: "id",
-        headerName: "ID",
-        width: 90,
-    },
-    {
-        field: "createdAt",
-        headerName: "Created at",
-        width: 200,
-        valueGetter: (params: GridValueGetterParams<TempData, Date>) => {
-            if (params.value) {
-                return params.value.toLocaleString();
-            }
-            return '';
-        }
-    },
-    {
-        field: "updatedAt",
-        headerName: "Updated at",
-        width: 200,
-        valueGetter: (params: GridValueGetterParams<TempData, Date>) => {
-            if (params.value) {
-                return params.value.toLocaleString();
-            }
-            return '';
-        }
-    },
-    {
-        field: "temp",
-        headerName: "Temperature",
-        width: 150
-    },
-    {
-        field: "temp_unit",
-        headerName: "Temperature unit",
-        width: 170
-    },
-];
-
 export const TableTemp: React.FC = () => {
     const isLoading = useSubscribe("tempAll");
     const temps = useTracker(() => TempModelCollection.find({}).fetch());
@@ -59,12 +19,58 @@ export const TableTemp: React.FC = () => {
         id: temp._id 
     }));
     
+    const cols: GridColDef[] = [
+        {
+            field: "id",
+            headerName: "ID",
+            width: 250,
+        },
+        {
+            field: "createdAt",
+            headerName: "Created at",
+            width: 200,
+            valueGetter: (params) => {
+                if (params.row.createdAt instanceof Date) {
+                    return params.row.createdAt.toLocaleString();
+                }
+                if (params.row.createdAt) {
+                    return new Date(params.row.createdAt).toLocaleString();
+                }
+                return '';
+            }
+        },
+        {
+            field: "updatedAt",
+            headerName: "Updated at",
+            width: 200,
+            valueGetter: (params) => {
+                if (params.row.updatedAt instanceof Date) {
+                    return params.row.updatedAt.toLocaleString();
+                }
+                if (params.row.updatedAt) {
+                    return new Date(params.row.updatedAt).toLocaleString();
+                }
+                return '';
+            }
+        },
+        {
+            field: "temp",
+            headerName: "Temperature",
+            width: 150
+        },
+        {
+            field: "temp_unit",
+            headerName: "Temperature unit",
+            width: 170
+        },
+    ];
+    
     return (
         <Paper elevation={3}>
             <DataGrid
-                sx={{height: "500px", width: "100%"}}
                 rows={rows}
                 columns={cols}
+                autoHeight
                 initialState={{
                     pagination: {
                         paginationModel: { page: 0, pageSize: 10 },
