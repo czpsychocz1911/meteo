@@ -30,7 +30,7 @@ export const GraphAppBar: React.FC = () => {
 				<Stack
 					direction="row"
 					alignItems="center"
-					spacing={8}
+					spacing={4}
 					paddingLeft={2}
 					paddingRight={2}
 					paddingTop={1}
