@@ -4,13 +4,19 @@ import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
 import { SensorDataProvider } from "../SensorDataContext";
 import { useNavigate } from "react-router-dom";
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 export const GraphAppBar: React.FC = () => {
 	const navigate = useNavigate()
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+    const [graphAnchor, setGraphAnchor] = React.useState<null | HTMLElement>(null)
 	const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(e.currentTarget);
 	};
+
+    const handleGraph = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setGraphAnchor(e.currentTarget)
+    }
 
 	const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
@@ -59,6 +65,22 @@ export const GraphAppBar: React.FC = () => {
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
 					</SensorDataProvider>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={handleGraph}
+                    >
+                        <KeyboardDoubleArrowDownIcon/>
+                    </Button>
+                    <Menu
+                        anchorEl={graphAnchor}
+                        open={Boolean(graphAnchor)}
+                        onClose={() => setAnchorEl(null)} 
+                    >
+                    <Button>Temperature graph</Button>
+                    <Button>Soil humidity graph</Button>
+                    <Button>Humidity graph</Button>
+                    </Menu>
 				</Stack>
 			</AppBar>
 		</div>
