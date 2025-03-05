@@ -11,6 +11,7 @@ import { GraphPage } from '/imports/ui/GraphPage';
 import { HumidityContentPaper } from '/imports/ui/ContentPage/HumidityContentPaper';
 import { TableContentTempPaper } from '/imports/ui/ContentPage/TableContentTempPaper';
 import { TableSoilContentPaper } from '/imports/ui/ContentPage/TableSoilContentPaper';
+import { TableHumContentPaper } from '/imports/ui/ContentPage/TableHumContentPaper';
 
 const getDefaultTheme = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -78,7 +79,7 @@ const App = () => {
       path: "main/table/humidity",
       element: (
         <ProtectedRoute>
-          <TableHu
+          <TableHumContentPaper/>
         </ProtectedRoute>
       )
     },
