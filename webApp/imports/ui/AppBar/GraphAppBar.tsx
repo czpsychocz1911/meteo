@@ -76,12 +76,19 @@ export const GraphAppBar: React.FC = () => {
                     <Menu
                         anchorEl={graphAnchor}
                         open={Boolean(graphAnchor)}
-                        onClose={() => setAnchorEl(null)} 
+                        onClose={() => setGraphAnchor(null)} 
                     >
                     <Button onClick={() => navigate("/main/graphs")}>Temperature graph</Button>
-                    <Button onClick={() => navigate("main/graphs/soil")}>Soil humidity graph</Button>
+                    <Button onClick={() => navigate("/main/graphs/soil")}>Soil humidity graph</Button>
                     <Button onClick={() => navigate("/main/graphs/humidity")}>Humidity graph</Button>
                     </Menu>
+					<Button
+						color="secondary"
+						variant="contained"
+						fullWidth={false}
+					>
+						<KeyboardDoubleArrowDownIcon/>
+					</Button>
 				</Stack>
 			</AppBar>
 		</div>
