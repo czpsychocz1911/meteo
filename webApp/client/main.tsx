@@ -77,7 +77,9 @@ const App = () => {
     {
       path: "main/table/humidity",
       element: (
-        <p>Humidity</p>
+        <ProtectedRoute>
+          <TableHu
+        </ProtectedRoute>
       )
     },
     {
