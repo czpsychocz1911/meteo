@@ -29,7 +29,6 @@ export const GraphContentPaper: React.FC = () => {
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         handleData()
-        console.log(data)
     },[data])
 
     return (
@@ -41,7 +40,7 @@ export const GraphContentPaper: React.FC = () => {
                 xAxis={[
                     { data: x, scaleType: "time" }
                 ]} 
-                height={500} 
+                height={450} 
                 sx={{ width: "100%" }}
             />
         </Paper>
