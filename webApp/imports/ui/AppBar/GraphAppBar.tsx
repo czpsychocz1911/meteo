@@ -6,7 +6,7 @@ import { SensorDataProvider } from "../SensorDataContext";
 import { useNavigate } from "react-router-dom";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
-export const GraphAppBar: React.FC = () => {
+export const GraphAppBar: React.FC<{header: string}> = ({header}) => {
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const [graphAnchor, setGraphAnchor] = React.useState<null | HTMLElement>(
@@ -44,7 +44,7 @@ export const GraphAppBar: React.FC = () => {
 					paddingTop={1}
 					paddingBottom={1}
 				>
-					<h1>Graph page</h1>
+					<h1>{header}</h1>
 					<Button
 						onClick={handleMenu}
 						color="secondary"

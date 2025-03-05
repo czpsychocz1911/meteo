@@ -6,7 +6,7 @@ import { SoilPaper } from "./SoilPaper";
 export const SoilContentPaper : React.FC = () => {
     return(
         <div>
-            <GraphAppBar/>
+            <GraphAppBar header="Graph page"/>
             <SensorDataProviderLong>
                 <SoilPaper/>
             </SensorDataProviderLong>

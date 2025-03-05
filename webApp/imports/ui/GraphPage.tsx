@@ -6,7 +6,7 @@ import { SensorDataProviderLong } from "./SensorDataProviderLong";
 export const GraphPage : React.FC = () => {
     return(
         <div>
-            <GraphAppBar/>
+            <GraphAppBar header="Graph page"/>
             <SensorDataProviderLong>
                 <GraphContentPaper/>
             </SensorDataProviderLong>
