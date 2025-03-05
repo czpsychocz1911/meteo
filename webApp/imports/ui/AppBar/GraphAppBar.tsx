@@ -39,6 +39,14 @@ export const GraphAppBar: React.FC = () => {
 					>
 						Open user settings
 					</Button>
+                    <Button
+						onClick={(e) => handleNavigate(e)}
+						color="secondary"
+						variant="contained"
+						sx={{ marginRight: "0px" }}
+					>
+						Open main page
+					</Button>
 					<Menu
 						anchorEl={anchorEl}
 						open={Boolean(anchorEl)}
@@ -51,14 +59,6 @@ export const GraphAppBar: React.FC = () => {
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
 					</SensorDataProvider>
-					<Button
-						onClick={(e) => handleNavigate(e)}
-						color="secondary"
-						variant="contained"
-						sx={{ marginRight: "0px" }}
-					>
-						Open main page
-					</Button>
 				</Stack>
 			</AppBar>
 		</div>
