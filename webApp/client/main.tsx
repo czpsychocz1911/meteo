@@ -8,6 +8,7 @@ import { MainPage } from '/imports/ui/MainPage';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { DarkModeToggle } from '/imports/ui/DarkModeToggle';
 import { GraphPage } from '/imports/ui/GraphPage';
+import { HumidityContentPaper } from '/imports/ui/ContentPage/HumidityContentPaper';
 
 const getDefaultTheme = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -44,6 +45,22 @@ const App = () => {
       element: (
         <ProtectedRoute>
           <GraphPage/>
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: "/main/graphs/humidity",
+      element: (
+        <ProtectedRoute>
+          <HumidityContentPaper/>
+        </ProtectedRoute>
+      )
+    },
+    {
+      path: "main/graphs/soil",
+      element: (
+        <ProtectedRoute>
+          <HumidityContentPaper/>
         </ProtectedRoute>
       )
     }

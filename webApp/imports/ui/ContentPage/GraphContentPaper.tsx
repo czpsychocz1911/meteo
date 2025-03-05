@@ -40,7 +40,7 @@ export const GraphContentPaper: React.FC = () => {
                 xAxis={[
                     { data: x, scaleType: "time" }
                 ]} 
-                height={450} 
+                height={500} 
                 sx={{ width: "100%" }}
             />
         </Paper>
