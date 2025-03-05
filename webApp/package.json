@@ -14,6 +14,7 @@
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.4",
     "@mui/x-charts": "^7.27.1",
+    "@mui/x-data-grid": "^7.27.2",
     "@types/redis": "^4.0.10",
     "bcrypt": "^5.1.1",
     "json5": "^2.2.3",
