@@ -12,7 +12,7 @@ export interface SensorDataContextType {
   refreshData: () => Promise<void>;
 }
 
-const SensorDataContext = createContext<SensorDataContextType | undefined>(undefined);
+const SensorDataContextLong = createContext<SensorDataContextType | undefined>(undefined);
 
 export const SensorDataProviderLong: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tempData, setTempData] = useState<ParsedTemp[]>([]);
@@ -93,14 +93,14 @@ export const SensorDataProviderLong: React.FC<{ children: React.ReactNode }> = (
   };
   
   return (
-    <SensorDataContext.Provider value={contextValue}>
+    <SensorDataContextLong.Provider value={contextValue}>
       {children}
-    </SensorDataContext.Provider>
+    </SensorDataContextLong.Provider>
   );
 };
 
 export const useSensorDataLong = () => {
-  const context = useContext(SensorDataContext);
+  const context = useContext(SensorDataContextLong);
   if (context === undefined) {
     throw new Error("useSensorData must be used within a SensorDataProvider");
   }
