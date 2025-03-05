@@ -24,7 +24,7 @@ export const GraphAppBar: React.FC<{header: string}> = ({header}) => {
 	};
 
 	const handleTable = (e: React.MouseEvent<HTMLButtonElement>) => {
-		setGraphAnchor(e.currentTarget)
+		setTableAnchor(e.currentTarget)
 	}
 
 	const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
