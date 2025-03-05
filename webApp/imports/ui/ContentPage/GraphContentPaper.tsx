@@ -29,6 +29,7 @@ export const GraphContentPaper: React.FC = () => {
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         handleData()
+        console.log(data)
     },[])
 
     return (
