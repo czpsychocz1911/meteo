@@ -4,7 +4,7 @@ import { TempModelCollection } from "/imports/api/links";
 import { TempData } from "/imports/api/links";
 import { Paper } from "@mui/material";
 import { Loader } from "../AppBar/Loader";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridValueGetter } from "@mui/x-data-grid";
 
 export const TableTemp: React.FC = () => {
     const isLoading = useSubscribe("tempAll");
@@ -29,29 +29,26 @@ export const TableTemp: React.FC = () => {
             field: "createdAt",
             headerName: "Created at",
             width: 200,
-            valueGetter: (params) => {
-                if (params.row.createdAt instanceof Date) {
-                    return params.row.createdAt.toLocaleString();
+            valueFormatter: (value? : Date) =>{
+                if(value == null){
+                    return ""
                 }
-                if (params.row.createdAt) {
-                    return new Date(params.row.createdAt).toLocaleString();
-                }
-                return '';
+
+                return new Date(value).toLocaleString()
             }
         },
         {
             field: "updatedAt",
             headerName: "Updated at",
             width: 200,
-            valueGetter: (params) => {
-                if (params.row.updatedAt instanceof Date) {
-                    return params.row.updatedAt.toLocaleString();
+            valueFormatter: (value? : Date) =>{
+                if(value == null){
+                    return ""
                 }
-                if (params.row.updatedAt) {
-                    return new Date(params.row.updatedAt).toLocaleString();
-                }
-                return '';
+
+                return new Date(value).toLocaleString()
             }
+            
         },
         {
             field: "temp",
@@ -70,7 +67,7 @@ export const TableTemp: React.FC = () => {
             <DataGrid
                 rows={rows}
                 columns={cols}
-                autoHeight
+                sx={{height: "400px", width: "100%"}}
                 initialState={{
                     pagination: {
                         paginationModel: { page: 0, pageSize: 10 },
