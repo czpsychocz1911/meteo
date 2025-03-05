@@ -104,13 +104,13 @@ export const GraphAppBar: React.FC = () => {
 						open={Boolean(tableAnchor)}
 						onClose={() => setTableAnchor}
 					>
-						<Button onClick={() => navigate("/main/table")}>
+						<Button>
 							Temperature table
 						</Button>
-						<Button onClick={() => navigate("/main/table/humidity")}>
+						<Button>
 							Soil table
 						</Button>
-						<Button onClick={() => navigate("/main/table/soil")}>
+						<Button>
 							Humidity table
 						</Button>
 					</Menu>
