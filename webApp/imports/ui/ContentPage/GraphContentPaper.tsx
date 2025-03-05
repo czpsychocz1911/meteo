@@ -30,7 +30,7 @@ export const GraphContentPaper: React.FC = () => {
     useEffect(() => {
         handleData()
         console.log(data)
-    },[])
+    },[data])
 
     return (
         <Paper elevation={3}>
