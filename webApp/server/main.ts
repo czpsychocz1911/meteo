@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import "../imports/api/methods"
+import "../imports/api/publications"
 import { Accounts } from 'meteor/accounts-base';
 import { Redis } from './redis';
 

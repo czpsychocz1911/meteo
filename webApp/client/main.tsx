@@ -9,6 +9,7 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { DarkModeToggle } from '/imports/ui/DarkModeToggle';
 import { GraphPage } from '/imports/ui/GraphPage';
 import { HumidityContentPaper } from '/imports/ui/ContentPage/HumidityContentPaper';
+import { TableContentTempPaper } from '/imports/ui/ContentPage/TableContentTempPaper';
 
 const getDefaultTheme = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -67,7 +68,9 @@ const App = () => {
     {
       path: "main/table",
       element: (
-        <p>Table</p>
+        <ProtectedRoute>
+          <TableContentTempPaper/>
+        </ProtectedRoute>
       )
     },
     {
