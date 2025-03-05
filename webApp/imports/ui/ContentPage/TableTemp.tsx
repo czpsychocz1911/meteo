@@ -1,12 +1,12 @@
 import { useSubscribe, useTracker } from "meteor/react-meteor-data";
 import React from "react";
 import { TempModelCollection } from "/imports/api/links";
-import { TempData } from "/imports/api/links";
 import { Paper } from "@mui/material";
 import { Loader } from "../AppBar/Loader";
-import { DataGrid, GridColDef, GridValueGetter } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 export const TableTemp: React.FC = () => {
+
     const isLoading = useSubscribe("tempAll");
     const temps = useTracker(() => TempModelCollection.find({}).fetch());
     
@@ -73,7 +73,7 @@ export const TableTemp: React.FC = () => {
                         paginationModel: { page: 0, pageSize: 10 },
                     },
                 }}
-                pageSizeOptions={[5, 10, 25, 50]}
+                pageSizeOptions={[10]}
             />
         </Paper>
     );
