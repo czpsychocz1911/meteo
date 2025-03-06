@@ -4,6 +4,8 @@ import { UserProfileModal } from "./UserProfileModal";
 import { SensorCompLiveFeed } from "./SensorCompLiveFeed";
 import { SensorDataProvider } from "../SensorDataContext";
 import { useNavigate } from "react-router-dom";
+import { Meteor } from "meteor/meteor";
+import { UserProfileSettingsModal } from "./UserProfileSettingsModal";
 
 export const MainAppBar: React.FC = () => {
 	const navigate = useNavigate()
@@ -53,8 +55,8 @@ export const MainAppBar: React.FC = () => {
 						onClose={() => setAnchorEl(null)}
 					>
 						<UserProfileModal />
-						<MenuItem>Settings</MenuItem>
-						<MenuItem>Logout</MenuItem>
+						<UserProfileSettingsModal/>
+						<Button onClick={() => Meteor.logout()}>Logout</Button>
 					</Menu>
 					<SensorDataProvider>
 						<SensorCompLiveFeed />
